@@ -2,28 +2,27 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  OneToMany,
+  JoinColumn,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import Lesson from './Lesson.model';
 
 @Entity()
-export default class Class {
+export default class Content {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({
-    length: 100,
-    unique: true,
-  })
-  name: string;
+  @Column()
+  description: string;
 
   @Column()
-  duration: number;
+  linkContent: string;
 
-  @OneToMany(type => Lesson, classe => Class)
-  lessons: Lesson[];
+  @OneToOne(type => Lesson, content => Content)
+  @JoinColumn()
+  lesson: Lesson;
 
   @CreateDateColumn({ name: 'created_At' })
   createdAt: Date;

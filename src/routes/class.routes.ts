@@ -13,8 +13,8 @@ classRouter.post('/', async (request, response) => {
     return response.status(201).json(res);
   } catch (err) {
     logger.error(err.message);
+    return response.status(400).send();
   }
-  return {};
 });
 
 classRouter.get('/', async (request, response) => {
@@ -24,8 +24,8 @@ classRouter.get('/', async (request, response) => {
     return response.status(200).json(res);
   } catch (err) {
     logger.error(err.message);
+    return response.status(400).send();
   }
-  return {};
 });
 
 classRouter.get('/:name', async (request, response) => {
@@ -35,8 +35,8 @@ classRouter.get('/:name', async (request, response) => {
     return response.status(200).json(res);
   } catch (err) {
     logger.error(err.message);
+    return response.status(400).send();
   }
-  return {};
 });
 
 export default classRouter;

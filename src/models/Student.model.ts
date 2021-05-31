@@ -1,29 +1,28 @@
 import {
+  Entity,
   Column,
   CreateDateColumn,
-  Entity,
-  OneToMany,
-  PrimaryGeneratedColumn,
   UpdateDateColumn,
+  PrimaryGeneratedColumn,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
-import Lesson from './Lesson.model';
+import Class from './Class.model';
 
-@Entity()
-export default class Class {
+@Entity('student')
+export default class Student {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({
-    length: 100,
-    unique: true,
-  })
+  @Column()
   name: string;
 
   @Column()
-  duration: number;
+  key: number;
 
-  @OneToMany(type => Lesson, classe => Class)
-  lessons: Lesson[];
+  @ManyToMany(type => Class, { eager: true })
+  @JoinTable()
+  classes: Class[];
 
   @CreateDateColumn({ name: 'created_At' })
   createdAt: Date;
