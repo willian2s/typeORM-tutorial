@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getCustomRepository, getRepository } from 'typeorm';
+import { getConnection, getCustomRepository, getRepository } from 'typeorm';
 import logger from '../logger';
 import Course from '../models/Course.model';
 import CourseRepository from '../repositories/CourseRepository';
@@ -10,6 +10,7 @@ courseRouter.post('/', async (request, response) => {
   try {
     const repo = getRepository(Course);
     const res = await repo.save(request.body);
+    await getConnection().queryResultCache?.remove(['listCourse']);
     return response.status(201).json(res);
   } catch (err) {
     logger.error(err.message);
@@ -20,7 +21,9 @@ courseRouter.post('/', async (request, response) => {
 courseRouter.get('/', async (request, response) => {
   try {
     const repo = getRepository(Course);
-    const res = await repo.find();
+    const res = await repo.find({
+      cache: { id: 'listCourse', milliseconds: 10000 },
+    });
     return response.status(200).json(res);
   } catch (err) {
     logger.error(err.message);
