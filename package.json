@@ -38,6 +38,7 @@
     "pino": "^6.11.3",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.25",
+    "typeorm-encrypted": "^0.5.6",
     "uuidv4": "^6.0.7"
   }
 }

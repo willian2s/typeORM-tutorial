@@ -16,13 +16,18 @@ import {
   MinLength,
 } from 'class-validator';
 import Course from './Course.model';
+import Crypto from '../helpers/crypto';
 
 @Entity('student')
 export default class Student {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({
+    type: 'varchar',
+    nullable: false,
+    transformer: Crypto,
+  })
   @MinLength(2)
   @MaxLength(50)
   @IsString()
@@ -33,7 +38,12 @@ export default class Student {
   @Max(9999)
   key: number;
 
-  @Column()
+  @Column({
+    unique: true,
+    type: 'varchar',
+    nullable: false,
+    transformer: Crypto,
+  })
   @IsEmail()
   email: string;
 
