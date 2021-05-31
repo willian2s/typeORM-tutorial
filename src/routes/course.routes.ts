@@ -1,14 +1,14 @@
 import { Router } from 'express';
 import { getCustomRepository, getRepository } from 'typeorm';
 import logger from '../logger';
-import Class from '../models/Class.model';
-import ClassRepository from '../repositories/ClassRepository';
+import Course from '../models/Course.model';
+import CourseRepository from '../repositories/CourseRepository';
 
-const classRouter = Router();
+const courseRouter = Router();
 
-classRouter.post('/', async (request, response) => {
+courseRouter.post('/', async (request, response) => {
   try {
-    const repo = getRepository(Class);
+    const repo = getRepository(Course);
     const res = await repo.save(request.body);
     return response.status(201).json(res);
   } catch (err) {
@@ -17,9 +17,9 @@ classRouter.post('/', async (request, response) => {
   }
 });
 
-classRouter.get('/', async (request, response) => {
+courseRouter.get('/', async (request, response) => {
   try {
-    const repo = getRepository(Class);
+    const repo = getRepository(Course);
     const res = await repo.find();
     return response.status(200).json(res);
   } catch (err) {
@@ -28,9 +28,9 @@ classRouter.get('/', async (request, response) => {
   }
 });
 
-classRouter.get('/:name', async (request, response) => {
+courseRouter.get('/:name', async (request, response) => {
   try {
-    const repo = getCustomRepository(ClassRepository);
+    const repo = getCustomRepository(CourseRepository);
     const res = await repo.findByName(request.params.name);
     return response.status(200).json(res);
   } catch (err) {
@@ -39,4 +39,4 @@ classRouter.get('/:name', async (request, response) => {
   }
 });
 
-export default classRouter;
+export default courseRouter;

@@ -15,7 +15,7 @@ import {
   Min,
   MinLength,
 } from 'class-validator';
-import Class from './Class.model';
+import Course from './Course.model';
 
 @Entity('student')
 export default class Student {
@@ -37,9 +37,9 @@ export default class Student {
   @IsEmail()
   email: string;
 
-  @ManyToMany(type => Class, { eager: true })
+  @ManyToMany(type => Course, { eager: true })
   @JoinTable()
-  classes: Class[];
+  courses: Course[];
 
   @CreateDateColumn({ name: 'created_At' })
   createdAt: Date;

@@ -9,12 +9,12 @@ const studentRouter = Router();
 studentRouter.post('/', async (request, response) => {
   try {
     const repo = getRepository(Student);
-    const { key, name, email, classes } = request.body;
+    const { key, name, email, courses } = request.body;
     const student = repo.create({
       key,
       name,
       email,
-      classes,
+      courses,
     });
     const errors = await validate(student);
     if (errors.length === 0) {

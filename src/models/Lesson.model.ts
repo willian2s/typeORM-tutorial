@@ -7,8 +7,8 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import Class from './Class.model';
 import Content from './Content.model';
+import Course from './Course.model';
 
 @Entity()
 export default class Lesson {
@@ -21,8 +21,8 @@ export default class Lesson {
   @OneToOne(type => Content, lesson => Lesson)
   content: Content;
 
-  @ManyToOne(type => Class, lessons => Lesson, { eager: true })
-  classe: Class;
+  @ManyToOne(type => Course, lessons => Lesson, { eager: true })
+  courses: Course;
 
   @CreateDateColumn({ name: 'created_At' })
   createdAt: Date;

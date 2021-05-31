@@ -1,29 +1,19 @@
 import {
   Column,
   CreateDateColumn,
-  Entity,
-  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import Lesson from './Lesson.model';
 
-@Entity()
-export default class Class {
+export default class Identifier {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({
-    length: 100,
-    unique: true,
-  })
+  @Column()
   name: string;
 
   @Column()
-  duration: number;
-
-  @OneToMany(type => Lesson, classe => Class)
-  lessons: Lesson[];
+  cnpj: string;
 
   @CreateDateColumn({ name: 'created_At' })
   createdAt: Date;
