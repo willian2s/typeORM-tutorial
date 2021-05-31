@@ -19,6 +19,11 @@ export default class Course {
   })
   name: string;
 
+  @Column({
+    nullable: true,
+  })
+  description: number;
+
   @Column()
   duration: number;
 
