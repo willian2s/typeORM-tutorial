@@ -7,5 +7,5 @@ import './database';
 const port: number = config.get('App.port');
 
 app.listen(port, () => {
-  logger.info(`🏃 Running Server on port ${port}`);
+  logger.info(`🏃🚀 Running Server on port ${port}`);
 });
