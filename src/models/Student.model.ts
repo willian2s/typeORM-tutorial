@@ -6,6 +6,7 @@ import {
   PrimaryGeneratedColumn,
   ManyToMany,
   JoinTable,
+  ManyToOne,
 } from 'typeorm';
 import {
   IsEmail,
@@ -17,6 +18,7 @@ import {
 } from 'class-validator';
 import Course from './Course.model';
 import Crypto from '../helpers/crypto';
+import University from './University.model';
 
 @Entity('student')
 export default class Student {
@@ -50,6 +52,9 @@ export default class Student {
   @ManyToMany(type => Course, { eager: true })
   @JoinTable()
   courses: Course[];
+
+  @ManyToOne(type => University)
+  university: University;
 
   @CreateDateColumn({ name: 'created_At' })
   createdAt: Date;

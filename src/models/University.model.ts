@@ -1,17 +1,40 @@
-import { Column, Entity } from 'typeorm';
-import Identifier from './Identifier.model';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import Course from './Course.model';
+import Student from './Student.model';
 
 @Entity()
 export default class University {
-  @Column(type => Identifier)
-  identification: Identifier;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column()
-  graduations: number;
+  name: string;
+
+  @Column({
+    unique: true,
+  })
+  cnpj: string;
 
   @Column()
-  masters: number;
+  professors: number;
 
-  @Column()
-  doctors: number;
+  @OneToMany(type => Student, university => University)
+  students: Student[];
+
+  @OneToMany(type => Course, university => University)
+  courses: Course[];
+
+  @CreateDateColumn({ name: 'created_At' })
+  createdAt: Date;
+
+  @UpdateDateColumn({ name: 'updated_At' })
+  updatedAt: Date;
 }

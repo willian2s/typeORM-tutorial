@@ -2,11 +2,13 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import Lesson from './Lesson.model';
+import University from './University.model';
 
 @Entity()
 export default class Course {
@@ -29,6 +31,9 @@ export default class Course {
 
   @OneToMany(type => Lesson, courses => Course)
   lessons: Lesson[];
+
+  @ManyToOne(type => University, courses => Course, { eager: true })
+  university: University;
 
   @CreateDateColumn({ name: 'created_At' })
   createdAt: Date;
